@@ -1,0 +1,30 @@
+<div class="item-grid">
+    @for (product of products; track product.id){
+    <div class="item-card">
+        <div class="stock" [ngClass]="{'in-stock': product.inStock}">
+            {{ product.inStock ? 'In Stock' : 'Out of Stock' }}
+        </div>
+        <img [src]="product.image" class="item-img">
+        <div class="title-price-div">
+            <span class="title">
+                {{product.name}}
+            </span>
+            <span class="price">
+                {{product.price}}
+            </span>
+        </div>
+        <span class="description">
+            {{product.description}}
+        </span>
+        <div class="rating-row">
+            <span class="rating">
+                <span class="star">&#9733;</span> 
+                {{product.rating}}
+            </span>
+        </div>
+        <button class="add-to-cart-btn">
+            Add to Cart
+        </button>
+    </div>
+    }
+</div>
