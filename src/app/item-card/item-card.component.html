@@ -10,7 +10,7 @@
                 {{product.name}}
             </span>
             <span class="price">
-                {{product.price}}
+                {{ product.price | currency:product.currency:true }}
             </span>
         </div>
         <span class="description">

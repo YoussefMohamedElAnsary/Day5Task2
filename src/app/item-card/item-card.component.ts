@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NgClass } from '@angular/common';
+import { NgClass, CurrencyPipe } from '@angular/common';
 
 interface Product {
   id: number,
@@ -14,7 +14,7 @@ interface Product {
   
 @Component({
   selector: 'app-item-card',
-  imports: [NgClass],
+  imports: [NgClass, CurrencyPipe],
   templateUrl: './item-card.component.html',
   styleUrl: './item-card.component.css'
 })
