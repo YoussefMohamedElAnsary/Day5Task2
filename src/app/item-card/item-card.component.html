@@ -1,10 +1,10 @@
 <div class="item-grid">
     @for (product of products; track product.id){
-    <div class="item-card">
+    <div class="item-card" (click)="navigateToProduct(product.id)">
         <div class="stock" [ngClass]="{'in-stock': product.inStock}">
             {{ product.inStock ? 'In Stock' : 'Out of Stock' }}
         </div>
-        <img [src]="product.image" class="item-img">
+        <img [src]="product.image" class="item-img" [alt]="product.name">
         <div class="title-price-div">
             <span class="title">
                 {{product.name}}
@@ -22,7 +22,7 @@
                 {{product.rating}}
             </span>
         </div>
-        <button class="add-to-cart-btn">
+        <button class="add-to-cart-btn" (click)="$event.stopPropagation()">
             Add to Cart
         </button>
     </div>

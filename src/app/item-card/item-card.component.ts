@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NgClass, CurrencyPipe } from '@angular/common';
+import { Router } from '@angular/router';
 
 interface Product {
   id: number,
@@ -14,11 +15,14 @@ interface Product {
   
 @Component({
   selector: 'app-item-card',
+  standalone: true,
   imports: [NgClass, CurrencyPipe],
   templateUrl: './item-card.component.html',
   styleUrl: './item-card.component.css'
 })
 export class ItemCardComponent {
+  constructor(private router: Router) {}
+
   products: Product[] = [
     {
       id: 1,
@@ -60,7 +64,6 @@ export class ItemCardComponent {
       image: "https://tse1.mm.bing.net/th/id/OIP.FS2k0phpzicLE8FozQlhDgHaHa?rs=1&pid=ImgDetMain&o=7&rm=3",
       description: "Wired Stereo Headsets With Mic"
     },
-    // Duplicates for the second row
     {
       id: 5,
       name: "Wireless Earbuds, IPX8",
@@ -102,4 +105,8 @@ export class ItemCardComponent {
       description: "Wired Stereo Headsets With Mic"
     }
   ];
+
+  navigateToProduct(productId: number) {
+    this.router.navigate(['/product', productId]);
+  }
 }

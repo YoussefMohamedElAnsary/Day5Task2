@@ -1,0 +1,63 @@
+<div class="product-details">
+  @if (loading) {
+    <div class="loading">
+      <div class="spinner"></div>
+      <p>Loading product details...</p>
+    </div>
+  } @else if (error) {
+    <div class="error">
+      <p>{{error}}</p>
+      <button (click)="loadProduct(product.id)">Try Again</button>
+    </div>
+  } @else if (product) {
+    <div class="product-container">
+      <div class="image-gallery">
+        <button class="nav-btn prev" (click)="previousImage()" [style.display]="product.images.length > 1 ? 'block' : 'none'">❮</button>
+        <img [src]="product.images[currentImageIndex]" [alt]="product.title" class="product-image">
+        <button class="nav-btn next" (click)="nextImage()" [style.display]="product.images.length > 1 ? 'block' : 'none'">❯</button>
+        
+        <div class="image-thumbnails" *ngIf="product.images.length > 1">
+          @for (image of product.images; track $index) {
+            <img 
+              [src]="image" 
+              [alt]="product.title + ' thumbnail'"
+              class="thumbnail"
+              [class.active]="currentImageIndex === $index"
+              (click)="currentImageIndex = $index">
+          }
+        </div>
+      </div>
+
+      <div class="product-info">
+        <h1>{{product.title}}</h1>
+        <p class="brand">{{product.brand}}</p>
+        <div class="rating">
+          <span class="stars">
+            @for (star of [1,2,3,4,5]; track star) {
+              <span class="star" [class.filled]="star <= product.rating">★</span>
+            }
+          </span>
+          <span class="rating-value">{{product.rating}}</span>
+        </div>
+        <p class="price">${{product.price}}</p>
+        <p class="description">{{product.description}}</p>
+        
+        <div class="stock-info" [class.in-stock]="product.stock > 0">
+          {{ product.stock > 0 ? 'In Stock (' + product.stock + ' available)' : 'Out of Stock' }}
+        </div>
+
+        <button 
+          class="add-to-cart-btn" 
+          (click)="addToCart()"
+          [disabled]="product.stock === 0">
+          {{ product.stock > 0 ? 'Add to Cart' : 'Out of Stock' }}
+        </button>
+
+        <div class="additional-info">
+          <p><strong>Category:</strong> {{product.category}}</p>
+          <p><strong>Brand:</strong> {{product.brand}}</p>
+        </div>
+      </div>
+    </div>
+  }
+</div>
